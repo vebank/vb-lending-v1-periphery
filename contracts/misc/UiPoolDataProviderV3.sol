@@ -1,24 +1,24 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {IERC20Detailed} from '../core-v1/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
-import {IPoolAddressesProvider} from '../core-v1/interfaces/IPoolAddressesProvider.sol';
+import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IUiPoolDataProviderV3} from './interfaces/IUiPoolDataProviderV3.sol';
-import {IPool} from '../core-v1/interfaces/IPool.sol';
-import {IAaveOracle} from '../core-v1/interfaces/IAaveOracle.sol';
-import {IAToken} from '../core-v1/interfaces/IAToken.sol';
-import {IVariableDebtToken} from '../core-v1/interfaces/IVariableDebtToken.sol';
-import {IStableDebtToken} from '../core-v1/interfaces/IStableDebtToken.sol';
-import {WadRayMath} from '../core-v1/protocol/libraries/math/WadRayMath.sol';
-import {ReserveConfiguration} from '../core-v1/protocol/libraries/configuration/ReserveConfiguration.sol';
-import {UserConfiguration} from '../core-v1/protocol/libraries/configuration/UserConfiguration.sol';
-import {DataTypes} from '../core-v1/protocol/libraries/types/DataTypes.sol';
+import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
+import {IVeBankOracle} from '@vebank/core-v1/contracts/interfaces/IVeBankOracle.sol';
+import {IAToken} from '@vebank/core-v1/contracts/interfaces/IAToken.sol';
+import {IVariableDebtToken} from '@vebank/core-v1/contracts/interfaces/IVariableDebtToken.sol';
+import {IStableDebtToken} from '@vebank/core-v1/contracts/interfaces/IStableDebtToken.sol';
+import {WadRayMath} from '@vebank/core-v1/contracts/protocol/libraries/math/WadRayMath.sol';
+import {ReserveConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/ReserveConfiguration.sol';
+import {UserConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/UserConfiguration.sol';
+import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
 import {
   DefaultReserveInterestRateStrategy
-} from '../core-v1/protocol/pool/DefaultReserveInterestRateStrategy.sol';
+} from '@vebank/core-v1/contracts/protocol/pool/DefaultReserveInterestRateStrategy.sol';
 import {IEACAggregatorProxy} from './interfaces/IEACAggregatorProxy.sol';
 import {IERC20DetailedBytes} from './interfaces/IERC20DetailedBytes.sol';
-import {AaveProtocolDataProvider} from '../core-v1/misc/AaveProtocolDataProvider.sol';
+import {VeBankProtocolDataProvider} from '@vebank/core-v1/contracts/misc/VeBankProtocolDataProvider.sol';
 
 contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
   using WadRayMath for uint256;
@@ -77,9 +77,9 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
       BaseCurrencyInfo memory
     )
   {
-    IAaveOracle oracle = IAaveOracle(provider.getPriceOracle());
+    IVeBankOracle oracle = IVeBankOracle(provider.getPriceOracle());
     IPool pool = IPool(provider.getPool());
-    AaveProtocolDataProvider poolDataProvider = AaveProtocolDataProvider(provider.getPoolDataProvider());
+    VeBankProtocolDataProvider poolDataProvider = VeBankProtocolDataProvider(provider.getPoolDataProvider());
 
     address[] memory reserves = pool.getReservesList();
     AggregatedReserveData[] memory reservesData = new AggregatedReserveData[](reserves.length);

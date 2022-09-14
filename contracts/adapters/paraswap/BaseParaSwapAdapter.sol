@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {DataTypes} from '../../core-v1/protocol/libraries/types/DataTypes.sol';
-import {FlashLoanReceiverBase} from '../../core-v1/flashloan/base/FlashLoanReceiverBase.sol';
-import {GPv2SafeERC20} from '../../core-v1/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
-import {IERC20} from '../../core-v1/dependencies/openzeppelin/contracts/IERC20.sol';
-import {IERC20Detailed} from '../../core-v1/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
-import {IERC20WithPermit} from '../../core-v1/interfaces/IERC20WithPermit.sol';
-import {IPoolAddressesProvider} from '../../core-v1/interfaces/IPoolAddressesProvider.sol';
-import {IPriceOracleGetter} from '../../core-v1/interfaces/IPriceOracleGetter.sol';
-import {SafeMath} from '../../core-v1/dependencies/openzeppelin/contracts/SafeMath.sol';
-import {Ownable} from '../../core-v1/dependencies/openzeppelin/contracts/Ownable.sol';
+import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
+import {FlashLoanReceiverBase} from '@vebank/core-v1/contracts/flashloan/base/FlashLoanReceiverBase.sol';
+import {GPv2SafeERC20} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
+import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {IERC20WithPermit} from '@vebank/core-v1/contracts/interfaces/IERC20WithPermit.sol';
+import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
+import {IPriceOracleGetter} from '@vebank/core-v1/contracts/interfaces/IPriceOracleGetter.sol';
+import {SafeMath} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeMath.sol';
+import {Ownable} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Ownable.sol';
 
 /**
  * @title BaseParaSwapAdapter

@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {SafeMath} from '../../core-v1/dependencies/openzeppelin/contracts/SafeMath.sol';
-import {PercentageMath} from '../../core-v1/protocol/libraries/math/PercentageMath.sol';
-import {IPoolAddressesProvider} from '../../core-v1/interfaces/IPoolAddressesProvider.sol';
-import {IERC20Detailed} from '../../core-v1/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {SafeMath} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeMath.sol';
+import {PercentageMath} from '@vebank/core-v1/contracts/protocol/libraries/math/PercentageMath.sol';
+import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
+import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
 import {IParaSwapAugustus} from './interfaces/IParaSwapAugustus.sol';
 import {IParaSwapAugustusRegistry} from './interfaces/IParaSwapAugustusRegistry.sol';
 import {BaseParaSwapAdapter} from './BaseParaSwapAdapter.sol';

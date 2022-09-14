@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity 0.8.10;
 
-import {VersionedInitializable} from '../core-v1/protocol/libraries/VeBank-upgradeability/VersionedInitializable.sol';
-import {SafeCast} from '../core-v1/dependencies/openzeppelin/contracts/SafeCast.sol';
-import {IScaledBalanceToken} from '../core-v1/interfaces/IScaledBalanceToken.sol';
+import {VersionedInitializable} from '@vebank/core-v1/contracts/protocol/libraries/vebank-upgradeability/VersionedInitializable.sol';
+import {SafeCast} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeCast.sol';
+import {IScaledBalanceToken} from '@vebank/core-v1/contracts/interfaces/IScaledBalanceToken.sol';
 import {RewardsDistributor} from './RewardsDistributor.sol';
 import {IRewardsController} from './interfaces/IRewardsController.sol';
 import {ITransferStrategyBase} from './interfaces/ITransferStrategyBase.sol';
@@ -31,7 +31,7 @@ contract RewardsController is RewardsDistributor, VersionedInitializable, IRewar
 
   // This mapping contains the price oracle per reward.
   // A price oracle is enforced for integrators to be able to show incentives at
-  // the current VeBank UI without the need to setup an external price registry
+  // the current Aave UI without the need to setup an external price registry
   // At the moment of reward configuration, the Incentives Controller performs
   // a check to see if the provided reward oracle contains `latestAnswer`.
   mapping(address => IEACAggregatorProxy) internal _rewardOracle;

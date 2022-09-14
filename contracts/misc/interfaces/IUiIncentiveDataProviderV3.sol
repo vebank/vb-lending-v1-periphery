@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {IPoolAddressesProvider} from '../../core-v1/interfaces/IPoolAddressesProvider.sol';
+import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 
 interface IUiIncentiveDataProviderV3 {
   struct AggregatedReserveIncentiveData {

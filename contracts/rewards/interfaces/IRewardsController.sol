@@ -64,11 +64,11 @@ interface IRewardsController is IRewardsDistributor {
   function setTransferStrategy(address reward, ITransferStrategyBase transferStrategy) external;
 
   /**
-   * @dev Sets an VeBank Oracle contract to enforce rewards with a source of value.
+   * @dev Sets an Aave Oracle contract to enforce rewards with a source of value.
    * @notice At the moment of reward configuration, the Incentives Controller performs
    * a check to see if the reward asset oracle is compatible with IEACAggregator proxy.
    * This check is enforced for integrators to be able to show incentives at
-   * the current VeBank UI without the need to setup an external price registry
+   * the current Aave UI without the need to setup an external price registry
    * @param reward The address of the reward to set the price aggregator
    * @param rewardOracle The address of price aggregator that follows IEACAggregatorProxy interface
    */

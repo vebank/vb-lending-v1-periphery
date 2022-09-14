@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity 0.8.10;
 
-import {Ownable} from '../core-v1/dependencies/openzeppelin/contracts/Ownable.sol';
-import {IERC20} from '../core-v1/dependencies/openzeppelin/contracts/IERC20.sol';
+import {Ownable} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Ownable.sol';
+import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
 import {IWETH} from './interfaces/IWETH.sol';
 import {IWETHGateway} from './interfaces/IWETHGateway.sol';
-import {IPool} from '../core-v1/interfaces/IPool.sol';
-import {IAToken} from '../core-v1/interfaces/IAToken.sol';
-import {ReserveConfiguration} from '../core-v1/protocol/libraries/configuration/ReserveConfiguration.sol';
-import {UserConfiguration} from '../core-v1/protocol/libraries/configuration/UserConfiguration.sol';
-import {DataTypes} from '../core-v1/protocol/libraries/types/DataTypes.sol';
+import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
+import {IAToken} from '@vebank/core-v1/contracts/interfaces/IAToken.sol';
+import {ReserveConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/ReserveConfiguration.sol';
+import {UserConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/UserConfiguration.sol';
+import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
 import {DataTypesHelper} from '../libraries/DataTypesHelper.sol';
 
 contract WETHGateway is IWETHGateway, Ownable {

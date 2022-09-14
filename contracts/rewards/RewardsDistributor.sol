@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity 0.8.10;
 
-import {IERC20Detailed} from '../core-v1/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
-import {SafeCast} from '../core-v1/dependencies/openzeppelin/contracts/SafeCast.sol';
+import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {SafeCast} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeCast.sol';
 import {IRewardsDistributor} from './interfaces/IRewardsDistributor.sol';
 import {RewardsDataTypes} from './libraries/RewardsDataTypes.sol';
 

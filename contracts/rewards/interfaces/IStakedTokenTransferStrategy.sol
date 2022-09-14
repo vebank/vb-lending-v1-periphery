@@ -10,12 +10,12 @@ import {ITransferStrategyBase} from './ITransferStrategyBase.sol';
  **/
 interface IStakedTokenTransferStrategy is ITransferStrategyBase {
   /**
-   * @dev Perform a MAX_UINT approval of VeBank to the Staked VeBank contract.
+   * @dev Perform a MAX_UINT approval of VEBANK to the Staked VeBank contract.
    */
   function renewApproval() external;
 
   /**
-   * @dev Drop approval of VeBank to the Staked VeBank contract in case of emergency.
+   * @dev Drop approval of VEBANK to the Staked VeBank contract in case of emergency.
    */
   function dropApproval() external;
 

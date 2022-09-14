@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {Ownable} from '../../core-v1/dependencies/openzeppelin/contracts/Ownable.sol';
-import {IERC20} from '../../core-v1/dependencies/openzeppelin/contracts/IERC20.sol';
+import {Ownable} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Ownable.sol';
+import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
 
 contract MockParaSwapTokenTransferProxy is Ownable {
   function transferFrom(

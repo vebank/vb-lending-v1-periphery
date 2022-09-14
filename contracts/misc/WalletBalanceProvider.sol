@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {Address} from '../core-v1/dependencies/openzeppelin/contracts/Address.sol';
-import {IERC20} from '../core-v1/dependencies/openzeppelin/contracts/IERC20.sol';
+import {Address} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Address.sol';
+import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
 
-import {IPoolAddressesProvider} from '../core-v1/interfaces/IPoolAddressesProvider.sol';
-import {IPool} from '../core-v1/interfaces/IPool.sol';
-import {GPv2SafeERC20} from '../core-v1/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
-import {ReserveConfiguration} from '../core-v1/protocol/libraries/configuration/ReserveConfiguration.sol';
-import {DataTypes} from '../core-v1/protocol/libraries/types/DataTypes.sol';
+import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
+import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
+import {GPv2SafeERC20} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
+import {ReserveConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/ReserveConfiguration.sol';
+import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
 
 /**
  * @title WalletBalanceProvider contract

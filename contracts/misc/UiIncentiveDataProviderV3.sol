@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity 0.8.10;
 
-import {IPoolAddressesProvider} from '../core-v1/interfaces/IPoolAddressesProvider.sol';
+import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IRewardsController} from '../rewards/interfaces/IRewardsController.sol';
 import {IUiIncentiveDataProviderV3} from './interfaces/IUiIncentiveDataProviderV3.sol';
-import {IPool} from '../core-v1/interfaces/IPool.sol';
-import {IncentivizedERC20} from '../core-v1/protocol/tokenization/base/IncentivizedERC20.sol';
-import {UserConfiguration} from '../core-v1/protocol/libraries/configuration/UserConfiguration.sol';
-import {DataTypes} from '../core-v1/protocol/libraries/types/DataTypes.sol';
-import {IERC20Detailed} from '../core-v1/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
+import {IncentivizedERC20} from '@vebank/core-v1/contracts/protocol/tokenization/base/IncentivizedERC20.sol';
+import {UserConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/UserConfiguration.sol';
+import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
+import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
 import {IEACAggregatorProxy} from './interfaces/IEACAggregatorProxy.sol';
 
 contract UiIncentiveDataProviderV3 is IUiIncentiveDataProviderV3 {
