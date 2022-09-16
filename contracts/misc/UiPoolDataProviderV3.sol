@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {IVIP180Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180Detailed.sol';
 import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IUiPoolDataProviderV3} from './interfaces/IUiPoolDataProviderV3.sol';
 import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
@@ -17,7 +17,7 @@ import {
   DefaultReserveInterestRateStrategy
 } from '@vebank/core-v1/contracts/protocol/pool/DefaultReserveInterestRateStrategy.sol';
 import {IEACAggregatorProxy} from './interfaces/IEACAggregatorProxy.sol';
-import {IERC20DetailedBytes} from './interfaces/IERC20DetailedBytes.sol';
+import {IVIP180DetailedBytes} from './interfaces/IVIP180DetailedBytes.sol';
 import {VeBankProtocolDataProvider} from '@vebank/core-v1/contracts/misc/VeBankProtocolDataProvider.sol';
 
 contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
@@ -109,7 +109,7 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
       reserveData.interestRateStrategyAddress = baseData.interestRateStrategyAddress;
       reserveData.priceInMarketReferenceCurrency = oracle.getAssetPrice(reserveData.underlyingAsset);
       reserveData.priceOracle = oracle.getSourceOfAsset(reserveData.underlyingAsset);
-      reserveData.availableLiquidity = IERC20Detailed(reserveData.underlyingAsset).balanceOf(
+      reserveData.availableLiquidity = IVIP180Detailed(reserveData.underlyingAsset).balanceOf(
         reserveData.aTokenAddress
       );
       (
@@ -123,10 +123,10 @@ contract UiPoolDataProviderV3 is IUiPoolDataProviderV3 {
 
       // Due we take the symbol from underlying token we need a special case for $MKR as symbol() returns bytes32
       if (address(reserveData.underlyingAsset) == address(MKR_ADDRESS)) {
-        bytes32 symbol = IERC20DetailedBytes(reserveData.underlyingAsset).symbol();
+        bytes32 symbol = IVIP180DetailedBytes(reserveData.underlyingAsset).symbol();
         reserveData.symbol = bytes32ToString(symbol);
       } else {
-        reserveData.symbol = IERC20Detailed(reserveData.underlyingAsset).symbol();
+        reserveData.symbol = IVIP180Detailed(reserveData.underlyingAsset).symbol();
       }
 
       //stores the reserve configuration

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity 0.8.10;
 
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
 
 /**
@@ -23,8 +23,8 @@ library DataTypesHelper {
     returns (uint256, uint256)
   {
     return (
-      IERC20(reserve.stableDebtTokenAddress).balanceOf(user),
-      IERC20(reserve.variableDebtTokenAddress).balanceOf(user)
+      IVIP180(reserve.stableDebtTokenAddress).balanceOf(user),
+      IVIP180(reserve.variableDebtTokenAddress).balanceOf(user)
     );
   }
 }

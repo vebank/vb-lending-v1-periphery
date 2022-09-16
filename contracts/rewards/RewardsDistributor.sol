@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity 0.8.10;
 
-import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {IVIP180Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180Detailed.sol';
 import {SafeCast} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeCast.sol';
 import {IRewardsDistributor} from './interfaces/IRewardsDistributor.sol';
 import {RewardsDataTypes} from './libraries/RewardsDataTypes.sol';
@@ -186,7 +186,7 @@ abstract contract RewardsDistributor is IRewardsDistributor {
 
       (uint256 newIndex, ) = _updateRewardData(
         rewardConfig,
-        IERC20Detailed(asset).totalSupply(),
+        IVIP180Detailed(asset).totalSupply(),
         10**decimals
       );
 
@@ -216,7 +216,7 @@ abstract contract RewardsDistributor is IRewardsDistributor {
         _assetsList.push(rewardsInput[i].asset);
       }
 
-      uint256 decimals = _assets[rewardsInput[i].asset].decimals = IERC20Detailed(
+      uint256 decimals = _assets[rewardsInput[i].asset].decimals = IVIP180Detailed(
         rewardsInput[i].asset
       ).decimals();
 

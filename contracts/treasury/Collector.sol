@@ -2,13 +2,13 @@
 pragma solidity 0.8.10;
 
 import {VersionedInitializable} from '@vebank/core-v1/contracts/protocol/libraries/vebank-upgradeability/VersionedInitializable.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 import {ICollector} from './interfaces/ICollector.sol';
 
 /**
  * @title Collector
  * @notice Stores the fees collected by the protocol and allows the fund administrator
- *         to approve or transfer the collected ERC20 tokens.
+ *         to approve or transfer the collected VIP180 tokens.
  * @dev Implementation contract that must be initialized using transparent proxy pattern.
  * @author VeBank
  **/
@@ -47,7 +47,7 @@ contract Collector is VersionedInitializable, ICollector {
 
   /// @inheritdoc ICollector
   function approve(
-    IERC20 token,
+    IVIP180 token,
     address recipient,
     uint256 amount
   ) external onlyFundsAdmin {
@@ -56,7 +56,7 @@ contract Collector is VersionedInitializable, ICollector {
 
   /// @inheritdoc ICollector
   function transfer(
-    IERC20 token,
+    IVIP180 token,
     address recipient,
     uint256 amount
   ) external onlyFundsAdmin {

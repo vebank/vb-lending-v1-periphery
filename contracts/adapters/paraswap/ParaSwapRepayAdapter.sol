@@ -2,9 +2,9 @@
 pragma solidity 0.8.10;
 
 import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
-import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
-import {IERC20WithPermit} from '@vebank/core-v1/contracts/interfaces/IERC20WithPermit.sol';
+import {IVIP180Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180Detailed.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
+import {IVIP180WithPermit} from '@vebank/core-v1/contracts/interfaces/IVIP180WithPermit.sol';
 import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 import {SafeMath} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeMath.sol';
 import {BaseParaSwapBuyAdapter} from './BaseParaSwapBuyAdapter.sol';
@@ -47,7 +47,7 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
    * @param premiums Fee of the flash loan
    * @param initiator Address of the user
    * @param params Additional variadic field to include extra params. Expected parameters:
-   *   IERC20Detailed debtAsset Address of the debt asset
+   *   IVIP180Detailed debtAsset Address of the debt asset
    *   uint256 debtAmount Amount of debt to be repaid
    *   uint256 rateMode Rate modes of the debt to be repaid
    *   uint256 deadline Deadline for the permit signature
@@ -75,7 +75,7 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
     uint256 premium = premiums[0];
     address initiatorLocal = initiator;
 
-    IERC20Detailed collateralAsset = IERC20Detailed(assets[0]);
+    IVIP180Detailed collateralAsset = IVIP180Detailed(assets[0]);
 
     _swapAndRepay(params, premium, initiatorLocal, collateralAsset, collateralAmount);
 
@@ -97,8 +97,8 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
    * @param permitSignature struct containing the permit signature
    */
   function swapAndRepay(
-    IERC20Detailed collateralAsset,
-    IERC20Detailed debtAsset,
+    IVIP180Detailed collateralAsset,
+    IVIP180Detailed debtAsset,
     uint256 collateralAmount,
     uint256 debtRepayAmount,
     uint256 debtRateMode,
@@ -130,14 +130,14 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
 
     //deposit collateral back in the pool, if left after the swap(buy)
     if (collateralBalanceLeft > 0) {
-      IERC20(collateralAsset).approve(address(POOL), 0);
-      IERC20(collateralAsset).approve(address(POOL), collateralBalanceLeft);
+      IVIP180(collateralAsset).approve(address(POOL), 0);
+      IVIP180(collateralAsset).approve(address(POOL), collateralBalanceLeft);
       POOL.deposit(address(collateralAsset), collateralBalanceLeft, msg.sender, 0);
     }
 
     // Repay debt. Approves 0 first to comply with tokens that implement the anti frontrunning approval fix
-    IERC20(debtAsset).approve(address(POOL), 0);
-    IERC20(debtAsset).approve(address(POOL), debtRepayAmount);
+    IVIP180(debtAsset).approve(address(POOL), 0);
+    IVIP180(debtAsset).approve(address(POOL), debtRepayAmount);
     POOL.repay(address(debtAsset), debtRepayAmount, debtRateMode, msg.sender);
   }
 
@@ -153,17 +153,17 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
     bytes calldata params,
     uint256 premium,
     address initiator,
-    IERC20Detailed collateralAsset,
+    IVIP180Detailed collateralAsset,
     uint256 collateralAmount
   ) private {
     (
-      IERC20Detailed debtAsset,
+      IVIP180Detailed debtAsset,
       uint256 debtRepayAmount,
       uint256 buyAllBalanceOffset,
       uint256 rateMode,
       bytes memory paraswapData,
       PermitSignature memory permitSignature
-    ) = abi.decode(params, (IERC20Detailed, uint256, uint256, uint256, bytes, PermitSignature));
+    ) = abi.decode(params, (IVIP180Detailed, uint256, uint256, uint256, bytes, PermitSignature));
 
     debtRepayAmount = getDebtRepayAmount(
       debtAsset,
@@ -183,8 +183,8 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
     );
 
     // Repay debt. Approves for 0 first to comply with tokens that implement the anti frontrunning approval fix.
-    IERC20(debtAsset).approve(address(POOL), 0);
-    IERC20(debtAsset).approve(address(POOL), debtRepayAmount);
+    IVIP180(debtAsset).approve(address(POOL), 0);
+    IVIP180(debtAsset).approve(address(POOL), debtRepayAmount);
     POOL.repay(address(debtAsset), debtRepayAmount, rateMode, initiator);
 
     uint256 neededForFlashLoanRepay = amountSold.add(premium);
@@ -198,12 +198,12 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
     );
 
     // Repay flashloan. Approves for 0 first to comply with tokens that implement the anti frontrunning approval fix.
-    IERC20(collateralAsset).approve(address(POOL), 0);
-    IERC20(collateralAsset).approve(address(POOL), collateralAmount.add(premium));
+    IVIP180(collateralAsset).approve(address(POOL), 0);
+    IVIP180(collateralAsset).approve(address(POOL), collateralAmount.add(premium));
   }
 
   function getDebtRepayAmount(
-    IERC20Detailed debtAsset,
+    IVIP180Detailed debtAsset,
     uint256 rateMode,
     uint256 buyAllBalanceOffset,
     uint256 debtRepayAmount,
@@ -215,7 +215,7 @@ contract ParaSwapRepayAdapter is BaseParaSwapBuyAdapter, ReentrancyGuard {
       ? debtReserveData.stableDebtTokenAddress
       : debtReserveData.variableDebtTokenAddress;
 
-    uint256 currentDebt = IERC20(debtToken).balanceOf(initiator);
+    uint256 currentDebt = IVIP180(debtToken).balanceOf(initiator);
 
     if (buyAllBalanceOffset != 0) {
       require(currentDebt <= debtRepayAmount, 'INSUFFICIENT_AMOUNT_TO_REPAY');

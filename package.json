@@ -10,13 +10,12 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
-    "truffle": "^5.5.7",
-    "@aave/core-v3": "^1.14.3-beta.0"
+    "@vebank/core-v1": "^1.0.2",
+    "truffle": "^5.5.7"
   },
-  "scripts":{
+  "scripts": {
     "test": "npx truffle test",
     "develop": "nodemon -e js,sol --exec 'npx truffle test'",
     "testnet": "npx truffle migrate --network testnet"
   }
-
 }

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
-import {IERC20WithPermit} from '@vebank/core-v1/contracts/interfaces/IERC20WithPermit.sol';
+import {IVIP180Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180Detailed.sol';
+import {IVIP180WithPermit} from '@vebank/core-v1/contracts/interfaces/IVIP180WithPermit.sol';
 import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 import {SafeMath} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeMath.sol';
 import {BaseParaSwapSellAdapter} from './BaseParaSwapSellAdapter.sol';
@@ -58,9 +58,9 @@ contract ParaSwapLiquiditySwapAdapter is BaseParaSwapSellAdapter, ReentrancyGuar
     uint256 flashLoanAmount = amounts[0];
     uint256 premium = premiums[0];
     address initiatorLocal = initiator;
-    IERC20Detailed assetToSwapFrom = IERC20Detailed(assets[0]);
+    IVIP180Detailed assetToSwapFrom = IVIP180Detailed(assets[0]);
     (
-      IERC20Detailed assetToSwapTo,
+      IVIP180Detailed assetToSwapTo,
       uint256 minAmountToReceive,
       uint256 swapAllBalanceOffset,
       bytes memory swapCalldata,
@@ -68,7 +68,7 @@ contract ParaSwapLiquiditySwapAdapter is BaseParaSwapSellAdapter, ReentrancyGuar
       PermitSignature memory permitParams
     ) = abi.decode(
         params,
-        (IERC20Detailed, uint256, uint256, bytes, IParaSwapAugustus, PermitSignature)
+        (IVIP180Detailed, uint256, uint256, bytes, IParaSwapAugustus, PermitSignature)
       );
 
     _swapLiquidity(
@@ -101,8 +101,8 @@ contract ParaSwapLiquiditySwapAdapter is BaseParaSwapSellAdapter, ReentrancyGuar
    * @param permitParams Struct containing the permit signatures, set to all zeroes if not used
    */
   function swapAndDeposit(
-    IERC20Detailed assetToSwapFrom,
-    IERC20Detailed assetToSwapTo,
+    IVIP180Detailed assetToSwapFrom,
+    IVIP180Detailed assetToSwapTo,
     uint256 amountToSwap,
     uint256 minAmountToReceive,
     uint256 swapAllBalanceOffset,
@@ -110,7 +110,7 @@ contract ParaSwapLiquiditySwapAdapter is BaseParaSwapSellAdapter, ReentrancyGuar
     IParaSwapAugustus augustus,
     PermitSignature calldata permitParams
   ) external nonReentrant {
-    IERC20WithPermit aToken = IERC20WithPermit(
+    IVIP180WithPermit aToken = IVIP180WithPermit(
       _getReserveData(address(assetToSwapFrom)).aTokenAddress
     );
 
@@ -164,11 +164,11 @@ contract ParaSwapLiquiditySwapAdapter is BaseParaSwapSellAdapter, ReentrancyGuar
     uint256 flashLoanAmount,
     uint256 premium,
     address initiator,
-    IERC20Detailed assetToSwapFrom,
-    IERC20Detailed assetToSwapTo,
+    IVIP180Detailed assetToSwapFrom,
+    IVIP180Detailed assetToSwapTo,
     uint256 minAmountToReceive
   ) internal {
-    IERC20WithPermit aToken = IERC20WithPermit(
+    IVIP180WithPermit aToken = IVIP180WithPermit(
       _getReserveData(address(assetToSwapFrom)).aTokenAddress
     );
     uint256 amountToSwap = flashLoanAmount;

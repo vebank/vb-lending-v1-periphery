@@ -12,7 +12,7 @@ import {IEACAggregatorProxy} from '../misc/interfaces/IEACAggregatorProxy.sol';
 
 /**
  * @title RewardsController
- * @notice Abstract contract template to build Distributors contracts for ERC20 rewards to protocol participants
+ * @notice Abstract contract template to build Distributors contracts for VIP180 rewards to protocol participants
  * @author VeBank
  **/
 contract RewardsController is RewardsDistributor, VersionedInitializable, IRewardsController {

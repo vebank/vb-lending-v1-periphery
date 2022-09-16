@@ -2,7 +2,7 @@
 pragma solidity 0.8.10;
 
 import {Ownable} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Ownable.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 import {IWETH} from './interfaces/IWETH.sol';
 import {IWETHGateway} from './interfaces/IWETHGateway.sol';
 import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
@@ -171,7 +171,7 @@ contract WETHGateway is IWETHGateway, Ownable {
   }
 
   /**
-   * @dev transfer ERC20 from the utility contract, for ERC20 recovery in case of stuck tokens due
+   * @dev transfer VIP180 from the utility contract, for VIP180 recovery in case of stuck tokens due
    * direct transfers to the contract address.
    * @param token token to transfer
    * @param to recipient of the transfer
@@ -182,7 +182,7 @@ contract WETHGateway is IWETHGateway, Ownable {
     address to,
     uint256 amount
   ) external onlyOwner {
-    IERC20(token).transfer(to, amount);
+    IVIP180(token).transfer(to, amount);
   }
 
   /**

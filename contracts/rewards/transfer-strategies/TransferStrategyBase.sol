@@ -2,15 +2,15 @@
 pragma solidity 0.8.10;
 
 import {ITransferStrategyBase} from '../interfaces/ITransferStrategyBase.sol';
-import {GPv2SafeERC20} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {GPv2SafeVIP180} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeVIP180.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 
 /**
  * @title TransferStrategyStorage
  * @author VeBank
  **/
 abstract contract TransferStrategyBase is ITransferStrategyBase {
-  using GPv2SafeERC20 for IERC20;
+  using GPv2SafeVIP180 for IVIP180;
 
   address internal immutable INCENTIVES_CONTROLLER;
   address internal immutable REWARDS_ADMIN;
@@ -59,7 +59,7 @@ abstract contract TransferStrategyBase is ITransferStrategyBase {
     address to,
     uint256 amount
   ) external onlyRewardsAdmin {
-    IERC20(token).safeTransfer(to, amount);
+    IVIP180(token).safeTransfer(to, amount);
 
     emit EmergencyWithdrawal(msg.sender, token, to, amount);
   }

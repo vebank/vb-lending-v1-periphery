@@ -2,11 +2,11 @@
 pragma solidity 0.8.10;
 
 import {Address} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Address.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 
 import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
 import {IPool} from '@vebank/core-v1/contracts/interfaces/IPool.sol';
-import {GPv2SafeERC20} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
+import {GPv2SafeVIP180} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeVIP180.sol';
 import {ReserveConfiguration} from '@vebank/core-v1/contracts/protocol/libraries/configuration/ReserveConfiguration.sol';
 import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/DataTypes.sol';
 
@@ -20,7 +20,7 @@ import {DataTypes} from '@vebank/core-v1/contracts/protocol/libraries/types/Data
 contract WalletBalanceProvider {
   using Address for address payable;
   using Address for address;
-  using GPv2SafeERC20 for IERC20;
+  using GPv2SafeVIP180 for IVIP180;
   using ReserveConfiguration for DataTypes.ReserveConfigurationMap;
 
   address constant MOCK_ETH_ADDRESS = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;
@@ -44,7 +44,7 @@ contract WalletBalanceProvider {
       return user.balance; // ETH balance
       // check if token is actually a contract
     } else if (token.isContract()) {
-      return IERC20(token).balanceOf(user);
+      return IVIP180(token).balanceOf(user);
     }
     revert('INVALID_TOKEN');
   }

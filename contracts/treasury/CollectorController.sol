@@ -2,7 +2,7 @@
 pragma solidity 0.8.10;
 
 import {Ownable} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/Ownable.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 import {ICollector} from './interfaces/ICollector.sol';
 
 /**
@@ -33,7 +33,7 @@ contract CollectorController is Ownable {
    * @param amount The amount to be transferred.
    */
   function approve(
-    IERC20 token,
+    IVIP180 token,
     address recipient,
     uint256 amount
   ) external onlyOwner {
@@ -47,7 +47,7 @@ contract CollectorController is Ownable {
    * @param amount The amount to be transferred.
    */
   function transfer(
-    IERC20 token,
+    IVIP180 token,
     address recipient,
     uint256 amount
   ) external onlyOwner {

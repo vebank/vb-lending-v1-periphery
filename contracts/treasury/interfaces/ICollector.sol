@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 
 /**
  * @title ICollector
@@ -34,7 +34,7 @@ interface ICollector {
    * @param amount The amount allowed to be pulled. If zero it will revoke the approval.
    */
   function approve(
-    IERC20 token,
+    IVIP180 token,
     address recipient,
     uint256 amount
   ) external;
@@ -46,7 +46,7 @@ interface ICollector {
    * @param amount The amount to be transferred.
    */
   function transfer(
-    IERC20 token,
+    IVIP180 token,
     address recipient,
     uint256 amount
   ) external;

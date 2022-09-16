@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.8.10;
 
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 
-interface IERC20DetailedBytes is IERC20 {
+interface IVIP180DetailedBytes is IVIP180 {
   function name() external view returns (bytes32);
 
   function symbol() external view returns (bytes32);

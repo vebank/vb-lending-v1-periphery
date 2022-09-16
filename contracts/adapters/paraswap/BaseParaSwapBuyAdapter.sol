@@ -4,7 +4,7 @@ pragma solidity 0.8.10;
 import {SafeMath} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/SafeMath.sol';
 import {PercentageMath} from '@vebank/core-v1/contracts/protocol/libraries/math/PercentageMath.sol';
 import {IPoolAddressesProvider} from '@vebank/core-v1/contracts/interfaces/IPoolAddressesProvider.sol';
-import {IERC20Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20Detailed.sol';
+import {IVIP180Detailed} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180Detailed.sol';
 import {IParaSwapAugustus} from './interfaces/IParaSwapAugustus.sol';
 import {IParaSwapAugustusRegistry} from './interfaces/IParaSwapAugustusRegistry.sol';
 import {BaseParaSwapAdapter} from './BaseParaSwapAdapter.sol';
@@ -40,8 +40,8 @@ abstract contract BaseParaSwapBuyAdapter is BaseParaSwapAdapter {
   function _buyOnParaSwap(
     uint256 toAmountOffset,
     bytes memory paraswapData,
-    IERC20Detailed assetToSwapFrom,
-    IERC20Detailed assetToSwapTo,
+    IVIP180Detailed assetToSwapFrom,
+    IVIP180Detailed assetToSwapTo,
     uint256 maxAmountToSwap,
     uint256 amountToReceive
   ) internal returns (uint256 amountSold) {

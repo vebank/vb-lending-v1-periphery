@@ -5,8 +5,8 @@ import {IStakedToken} from '../interfaces/IStakedToken.sol';
 import {IStakedTokenTransferStrategy} from '../interfaces/IStakedTokenTransferStrategy.sol';
 import {ITransferStrategyBase} from '../interfaces/ITransferStrategyBase.sol';
 import {TransferStrategyBase} from './TransferStrategyBase.sol';
-import {GPv2SafeERC20} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeERC20.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
+import {GPv2SafeVIP180} from '@vebank/core-v1/contracts/dependencies/gnosis/contracts/GPv2SafeVIP180.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
 
 /**
  * @title StakedTokenTransferStrategy
@@ -15,7 +15,7 @@ import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contra
  * @author VeBank
  **/
 contract StakedTokenTransferStrategy is TransferStrategyBase, IStakedTokenTransferStrategy {
-  using GPv2SafeERC20 for IERC20;
+  using GPv2SafeVIP180 for IVIP180;
 
   IStakedToken internal immutable STAKE_CONTRACT;
   address internal immutable UNDERLYING_TOKEN;
@@ -28,8 +28,8 @@ contract StakedTokenTransferStrategy is TransferStrategyBase, IStakedTokenTransf
     STAKE_CONTRACT = stakeToken;
     UNDERLYING_TOKEN = STAKE_CONTRACT.STAKED_TOKEN();
 
-    IERC20(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), 0);
-    IERC20(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), type(uint256).max);
+    IVIP180(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), 0);
+    IVIP180(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), type(uint256).max);
   }
 
   /// @inheritdoc TransferStrategyBase
@@ -52,13 +52,13 @@ contract StakedTokenTransferStrategy is TransferStrategyBase, IStakedTokenTransf
 
   /// @inheritdoc IStakedTokenTransferStrategy
   function renewApproval() external onlyRewardsAdmin {
-    IERC20(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), 0);
-    IERC20(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), type(uint256).max);
+    IVIP180(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), 0);
+    IVIP180(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), type(uint256).max);
   }
 
   /// @inheritdoc IStakedTokenTransferStrategy
   function dropApproval() external onlyRewardsAdmin {
-    IERC20(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), 0);
+    IVIP180(UNDERLYING_TOKEN).approve(address(STAKE_CONTRACT), 0);
   }
 
   /// @inheritdoc IStakedTokenTransferStrategy

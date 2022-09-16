@@ -3,8 +3,8 @@ pragma solidity 0.8.10;
 
 import {IParaSwapAugustus} from '../../adapters/paraswap/interfaces/IParaSwapAugustus.sol';
 import {MockParaSwapTokenTransferProxy} from './MockParaSwapTokenTransferProxy.sol';
-import {IERC20} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IERC20.sol';
-import {MintableERC20} from '@vebank/core-v1/contracts/mocks/tokens/MintableERC20.sol';
+import {IVIP180} from '@vebank/core-v1/contracts/dependencies/openzeppelin/contracts/IVIP180.sol';
+import {MintableVIP180} from '@vebank/core-v1/contracts/mocks/tokens/MintableVIP180.sol';
 
 contract MockParaSwapAugustus is IParaSwapAugustus {
   MockParaSwapTokenTransferProxy immutable TOKEN_TRANSFER_PROXY;
@@ -73,8 +73,8 @@ contract MockParaSwapAugustus is IParaSwapAugustus {
     );
     require(_receivedAmount >= toAmount, 'Received amount of tokens are less than expected');
     TOKEN_TRANSFER_PROXY.transferFrom(fromToken, msg.sender, address(this), fromAmount);
-    MintableERC20(toToken).mint(_receivedAmount);
-    IERC20(toToken).transfer(msg.sender, _receivedAmount);
+    MintableVIP180(toToken).mint(_receivedAmount);
+    IVIP180(toToken).transfer(msg.sender, _receivedAmount);
     _expectingSwap = false;
     return _receivedAmount;
   }
@@ -94,8 +94,8 @@ contract MockParaSwapAugustus is IParaSwapAugustus {
     );
     require(_fromAmount <= fromAmount, 'From amount of tokens are higher than expected');
     TOKEN_TRANSFER_PROXY.transferFrom(fromToken, msg.sender, address(this), _fromAmount);
-    MintableERC20(toToken).mint(toAmount);
-    IERC20(toToken).transfer(msg.sender, toAmount);
+    MintableVIP180(toToken).mint(toAmount);
+    IVIP180(toToken).transfer(msg.sender, toAmount);
     _expectingSwap = false;
     return fromAmount;
   }
